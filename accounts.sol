@@ -16,7 +16,7 @@ contract accounts {
         address _address = msg.sender;
         var user = users[_address];
 
-        user.acc_Id = uID++;
+        user.acc_Id = userAccounts.length;
 
     }
 }
