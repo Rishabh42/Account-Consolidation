@@ -1,22 +1,27 @@
 pragma solidity ^0.4.16;
 
 contract accounts {
-
-    uint uID;
-
+    
+    address[] public userAccounts;
+    
     struct User {
         uint acc_Id;
-        bool set;
+        //address _address;
     }
-
+    
     mapping(address => User) public users;
-    address[] public userAccounts;
+    mapping(address => uint256) balances;
 
-    function _newUser(uint uID) public {
-        address _address = msg.sender;
-        var user = users[_address];
-
+    function deposit() public payable { 
+        balances[msg.sender]+=msg.value;
+        userAccounts.push(msg.sender);
+        var user = users[msg.sender];
         user.acc_Id = userAccounts.length;
-
+        
     }
+    
+    function getContractBalance() public view returns (uint){
+        return address(this).balance;
+    }
+   
 }
