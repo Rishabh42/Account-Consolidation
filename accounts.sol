@@ -6,7 +6,8 @@ contract accounts {
     
     struct User {
         uint acc_Id;
-        //address _address;
+        bool set;
+  //      address _address;
     }
     
     mapping(address => User) public users;
@@ -14,14 +15,18 @@ contract accounts {
 
     function deposit() public payable { 
         balances[msg.sender]+=msg.value;
-        userAccounts.push(msg.sender);
         var user = users[msg.sender];
+        if (!user.set){
+        userAccounts.push(msg.sender);
         user.acc_Id = userAccounts.length;
+        user.set = true;
+        }
         
     }
     
-    function getContractBalance() public view returns (uint){
-        return address(this).balance;
+    function getAccountID() public view returns (uint){
+        return (users[msg.sender].acc_Id);
     }
-   
 }
+
+
