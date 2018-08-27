@@ -7,7 +7,6 @@ contract accounts {
     struct User {
         uint acc_Id;
         bool set;
-  //      address _address;
     }
     
     mapping(address => User) public users;
